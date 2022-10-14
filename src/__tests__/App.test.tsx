@@ -2,8 +2,15 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import App from "../App";
 
-test("renders learn react link", () => {
+export function renderApp() {
     render(<App />);
-    const linkElement = screen.getByText(/learn react/i);
-    expect(linkElement).toBeInTheDocument();
+}
+
+test("renderApp works with no exceptions", () => {
+    try {
+        renderApp();
+    } catch (e: any) {
+        // If there is an issue, it'll fail
+        fail(e);
+    }
 });
