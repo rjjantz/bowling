@@ -1,4 +1,3 @@
-const totalNumberOfPins = 10;
 export interface Frame {
     rolls: number[];
     isFrameComplete: boolean;

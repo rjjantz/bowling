@@ -1,4 +1,4 @@
-import { startGame, getFrame, getTotalScore, getCurrentFrameIndex, getFrameScore, roll } from "../ScoreKeeper";
+import { getCurrentFrameIndex, getFrame, getFrameScore, getTotalScore, roll, startGame } from "../Calculator";
 
 beforeEach(() => {
     startGame();
