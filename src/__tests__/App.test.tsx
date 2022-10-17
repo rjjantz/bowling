@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import App from "../App";
 
 export function renderApp() {
@@ -27,10 +28,44 @@ describe("app tests", () => {
         expect(screen.getByTestId("scoreBoard")).toBeInTheDocument();
     });
 
-    test("can start game", () => {
+    test("has start game button", () => {
         renderApp();
 
         const button = screen.queryByRole("button", { name: "Start Game" });
         expect(button).toBeInTheDocument();
+        expect(button).not.toBeDisabled();
+    });
+
+    test("has abort game button", () => {
+        renderApp();
+
+        const button = screen.queryByRole("button", { name: "Abort Game" });
+        expect(button).toBeInTheDocument();
+        expect(button).toBeDisabled();
+    });
+
+    test("start game button is disabled after click and abort game is enabled", async () => {
+        renderApp();
+
+        const startButton = screen.getByRole("button", { name: "Start Game" });
+        const abortButton = screen.getByRole("button", { name: "Abort Game" });
+
+        await userEvent.click(startButton);
+
+        expect(startButton).toBeDisabled();
+        expect(abortButton).not.toBeDisabled();
+    });
+
+    test("abort game button is disabled after click and abort game is enabled", async () => {
+        renderApp();
+
+        const startButton = screen.getByRole("button", { name: "Start Game" });
+        const abortButton = screen.getByRole("button", { name: "Abort Game" });
+
+        await userEvent.click(startButton);
+        await userEvent.click(abortButton);
+
+        expect(startButton).not.toBeDisabled();
+        expect(abortButton).toBeDisabled();
     });
 });
